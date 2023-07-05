@@ -32,7 +32,7 @@ while result == 0:
 
     elem3 = driver.find_element(By.ID, 'nextButtonId')
     driver.execute_script("arguments[0].click();", elem3)
-
+    now = datetime.now()
     try:
         WebDriverWait(driver, 3).until(EC.alert_is_present(),
                                        "Aucun rendez-vous n'est possible pour les motifs selectionnnés ou le créneau "
@@ -41,11 +41,10 @@ while result == 0:
         alert = driver.switch_to.alert
         alertMessage = alert.text
         alert.accept()
-        now = datetime.now()
         print(now, ":", alertMessage)
 
     except TimeoutException:
-        print("no alert. RDV available")
+        print(now, ":", "no alert. RDV available")
         result = 1
 
     ##    if alertMessage is not None:
@@ -53,5 +52,5 @@ while result == 0:
 
     driver.close()
 
-    ## Sleep 60 seconds
-    time.sleep(60)
+    ## Sleep 90 seconds
+    time.sleep(90)
